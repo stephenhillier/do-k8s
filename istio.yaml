@@ -1,0 +1,51 @@
+global:
+  nodePort: false
+
+sidecarInjectorWebhook:
+  enabled: true
+  enableNamespacesByDefault: false
+
+gateways:
+  enabled: true
+  istio-ingressgateway:
+    replicaCount: 2
+    autoscaleMin: 2
+    autoscaleMax: 3
+    type: LoadBalancer
+
+pilot:
+  enabled: true
+  replicaCount: 1
+  autoscaleMin: 1
+  autoscaleMax: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1024Mi
+
+grafana:
+  enabled: true
+  security:
+    enabled: true
+    adminUser: admin
+    adminPassword: change_me
+
+prometheus:
+  enabled: true
+
+kiali:
+  enabled: true
+  dashboard:
+    username: admin
+    passphrase: change_me
+
+servicegraph:
+  enabled: true
+
+tracing:
+  enabled: true
+  jaeger:
+    tag: 1.9
+
+certmanager:
+  enabled: true
