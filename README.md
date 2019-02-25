@@ -205,3 +205,44 @@ Save as `issuer.yaml` and apply:
 ```sh
 kubectl apply -f issuer.yaml
 ```
+
+Create a Certificate resource (replace example.com with your domain name):
+```yaml
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: istio-gateway
+  namespace: istio-system
+spec:
+  secretname: istio-ingressgateway-certs
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: Issuer
+  commonName: "*.example.com"
+  dnsNames:
+  - example.com
+  acme:
+    config:
+    - dns01:
+        provider: do-dns
+      domains:
+      - "*.example.com"
+      - example.com
+```
+
+Save as certificate.yaml and apply:
+
+```sh
+kubectl apply -f certificate.yaml
+```
+
+cert-manager will attempt to grab a certificate from Let's Encrypt, enabling you to serve any subdomain of your domain name using HTTPS. This process may take some time. Check logs with:
+
+```sh
+kubectl -n istio-system logs deployment/certmanager -f
+```
+
+When the certificate is successfully obtained, delete the ingress pods to reload the certificate:
+```sh
+kubectl -n istio-system delete pods -l istio=ingressgateway
+```
