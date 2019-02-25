@@ -111,6 +111,7 @@ tracing:
 
 certmanager:
   enabled: true
+  tag: v0.6.2
 ```
 
 Save the `istio.yaml` file and install Istio:
