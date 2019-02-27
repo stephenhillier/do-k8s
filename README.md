@@ -42,11 +42,6 @@ curl -L https://git.io/getLatestIstio | sh -
 cd istio-1.0.6
 ```
 
-Apply custom resource definitions (CRDs) for certmanager:
-```sh
-kubectl apply -f install/kubernetes/helm/istio/charts/certmanager/templates/crds.yaml
-```
-
 Create Tiller service account:
 ```sh
 kubectl apply -f ./install/kubernetes/helm/helm-service-account.yaml
