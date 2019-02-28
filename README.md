@@ -125,7 +125,7 @@ kubectl -n istio-system get pods
 
 certmanager was installed along with Istio, but we haven't applied custom resource definitions yet. This is a required step as of certmanager 0.6, but the Istio helm chart doesn't handle it yet.
 
-Apply certmanager CRDs (see 
+Apply certmanager CRDs
 ```sh
 kubectl apply \
     -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
