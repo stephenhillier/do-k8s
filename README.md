@@ -121,6 +121,16 @@ kubectl -n istio-system get pods
 
 ## Configure HTTPS with cert-manager and Let's Encrypt
 
+### certmanager service account and custom resource definitions
+
+certmanager was installed along with Istio, but we haven't applied custom resource definitions yet. This is a required step as of certmanager 0.6, but the Istio helm chart doesn't handle it yet.
+
+Apply certmanager CRDs (see 
+```sh
+kubectl apply \
+    -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
+```
+
 ### HTTPS Gateway
 Create an [Istio gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) (again, credit to https://github.com/stefanprodan/istio-gke for this example gateway):
 
